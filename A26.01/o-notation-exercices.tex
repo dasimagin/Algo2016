@@ -1,0 +1,185 @@
+\documentclass[10pt, oneside]{article}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{amssymb,amsthm,amsmath}
+
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+\parindent=1.25cm
+
+% ExCounter:
+\newcounter{ExCounter}
+\setcounter{ExCounter}{1}
+
+% DefCounter:
+\newcounter{DefCounter}
+\setcounter{DefCounter}{1}
+
+
+\newenvironment{definition}
+    {\textbf{Определение \arabic{DefCounter}.}}
+    {\par\stepcounter{DefCounter}}
+
+\newenvironment{exercise}
+    {\textbf{Упражнение \arabic{ExCounter}.}}
+    {\par\stepcounter{ExCounter}}
+
+\newenvironment{solution}
+    {\textit{Решение.}}
+    {\par}
+
+
+\title{Упражнения}
+
+\begin{document}
+\maketitle
+
+
+\begin{definition}
+    $f(n) = O(g(n))$,
+    если $\exists C > 0$, $n_{0}$: $\forall n > n_{0}$ $|f(n)| \leq C \cdot |g(n)|$.
+\end{definition}
+
+\begin{definition}
+    $f(n) = o(g(n))$,
+    если $\forall C > 0$  $\exists n_{0}:$ $\forall n > n_{0}$ $|f(n)| < C \cdot |g(n)|$.
+\end{definition}
+
+
+\begin{exercise}
+Используя определения, докажите следующие свойства:
+    \begin{enumerate}
+        \item $O(C \cdot f(n)) = O (f(n))$, $C \in \mathbb{R}^{+}$
+        \item $o(f(n)) + o(f(n)) = O(f(n))$
+        \item $o(f(n)) \cdot O(f(n)) = o(f(n))$
+    \end{enumerate}
+\end{exercise}
+\begin{solution}
+    Для доказательства достаточно раскрыть определение.
+\end{solution}
+
+
+\begin{exercise}
+    Покажите, что, если $f(n) = o(g(n))$, то $f(n) = O(g(n))$. Верно ли это в обратную сторону?
+\end{exercise}
+\begin{solution}
+    Ответ следует из определений. Очевидно, что если $\forall C > 0$ верно,
+    что $|f(n)| < C \cdot |g(n)|$,то автоматически выполняется условие, что $f(n) = O(g(n))$.
+    В обратну сторону это, конечно, не верно.
+    Заметим, что $f(n) = O(f(n))$,
+    однако $f(n)$ не может быть бесконечна мала относительно себя же,
+    поэтому $f(n) \neq o(f(n))$.
+\end{solution}
+
+\begin{exercise}
+    Для данных пар функций выясните их связь в терминах
+    $O$-, $o$-, $\omega$-, $\Omega$-, $\Theta$-обозначений.
+    \begin{enumerate}
+        \item $f(n) = n^{\frac{1}{2}}, \quad g(n) = n^{\frac{2}{3}}$
+        \item $f(n) = 100n + \ln n, \quad g(n) = n + (\ln n)^2$
+        \item $f(n) = \ln(n)^{\ln n}, \quad g(n) = \frac{n}{\ln(n)}$
+    \end{enumerate}
+\end{exercise}
+\begin{solution}
+    \begin{enumerate}
+        \item Рассмотрим предел
+            \begin{align*}
+                \lim_{n \to \infty} \frac{f(n)}{g(n)} =
+                \lim_{n \to \infty} \frac{n^{\frac{1}{2}}}{n^{\frac{2}{3}}} =
+                \lim_{n \to \infty} n^{- \frac{1}{6}} = 0,
+            \end{align*}
+        а это значит, что $f(n) = o(g(n))$.
+        \item Очевидно, что $f(n)$ и $g(n)$
+        ограничены снизу $\Omega(n)$. Рассмотрим следующий предел
+        \begin{align*}
+            \lim_{n \to \infty} \frac{(\ln n)^{k}}{n}, \quad k \in \mathbb{N}^{+}.
+        \end{align*}
+        Применив правило Лопиталя $k$ раз, получим
+        \begin{align*}
+            \lim_{n \to \infty} \frac{(\ln n)^{k}}{n} =
+            \lim_{n \to \infty} k \cdot \frac{(\ln n)^{k - 1}}{n} =
+            \dots =
+            \lim_{n \to \infty} \frac{k!}{n} =
+            0.
+        \end{align*}
+        Из этого следует, что $(\ln n)^{k} = o(n)$, где $k \in \mathbb{N}^{+}$,
+        а значит $f(n)$ и $g(n)$ ограничены сверху $O(n)$.
+        Из чего делаем вывод, что обе функции ограничены $\Theta(n)$.
+
+        \item Опять же рассмотрим предел \begin{equation*} \end{equation*}
+        \begin{align*}
+            \lim_{n \to \infty}
+            \frac {
+                \frac{n}{\ln n}
+            } {
+                (\ln n)^{\ln n}
+            }
+            \leq
+            \lim_{n \to \infty}
+            \frac{
+                n
+            } {
+                (\ln n)^{\ln n}
+            }
+        \end{align*}
+        Сделаем преобразование и получим,
+        \begin{align*}
+            \lim_{n \to \infty}
+            \exp \Big(
+                \ln n - \ln \big( (\ln n)^{\ln n} \big)
+            \Big) =
+            \lim_{n \to \infty}
+            \exp \Big(
+                \ln n \cdot \big( 1 - \ln \ln n \big)
+            \Big) =
+            0,
+        \end{align*}
+        так как выражение в степени стремится к $- \infty$.
+        А это значит, что $g(n) = o(f(n))$.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+    Приведите примеры функций $f(n)$ и $g(n)$, таких что
+    \begin{enumerate}
+        \item $f(n) = O(f(n))$, $f(n) = \Omega(g(n))$
+        \item $f(n) = O(g(n))$, $f(n) \neq \Omega(g(n))$
+        \item $f(n) = O(g(n))$, $f(n) \neq o(g(n))$
+    \end{enumerate}
+\end{exercise}
+\begin{solution}
+    Это упражнение проверяет ваше понимание определений, возможны следующие ответы:
+    \begin{enumerate}
+        \item $f(n) = 100n + \ln n$ и $g(n) = n$.
+        \item $f(n) = n$ и $g(n) = n^2$.
+        \item $f(n) = 2n$ и $g(n) = n + 3$.
+    \end{enumerate}
+\end{solution}
+
+\begin{exercise}
+Существуют ли такие функции $f(n)$ и $g(n)$, что $f = o(g(n))$ и $f =
+\omega(g(n))$? Приведите пример или докажите, что таких функций нет.
+\end{exercise}
+\begin{solution}
+    Очевидно, что таких функций нет. Иначем можно получить следующее неравество,
+    если посдавить в определения для $o$ и $\omega$ $C = 1$ для
+    \begin{align*}
+        f(n) < g(n) < f(n).
+    \end{align*}
+\end{solution}
+
+\begin{exercise}
+Приведите пример функций $f(n)$ и $g(n)$, таких что $f(n) = \Theta(g(n))$ и
+$2^{f(n)} = o(2^{g(n)})$ или докажите, что таких функций не существует.
+\end{exercise}
+\begin{solution}
+    $f(n) = n^2$ и $g(n) = n^2 + n$.
+\end{solution}
+
+\end{document}
