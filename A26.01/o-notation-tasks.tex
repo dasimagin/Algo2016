@@ -1,0 +1,97 @@
+\documentclass[10pt, oneside]{article}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{amssymb,amsthm,amsmath}
+
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+\parindent=1.25cm
+
+% ExCounter:
+\newcounter{ExCounter}
+\setcounter{ExCounter}{1}
+
+% DefCounter:
+\newcounter{DefCounter}
+\setcounter{DefCounter}{1}
+
+
+\newenvironment{definition}
+    {\textbf{Определение \arabic{DefCounter}.}}
+    {\par\stepcounter{DefCounter}}
+
+\newenvironment{exercise}
+    {\textbf{Упражнение \arabic{ExCounter}.}}
+    {\par\stepcounter{ExCounter}}
+
+\newenvironment{solution}
+    {\textit{Решение.}}
+    {\par}
+
+\newenvironment{remark}
+    {\textit{Замечение.}}
+    {\par}
+
+
+\title{Упражнения}
+
+\begin{document}
+\maketitle
+
+
+\begin{definition}
+    $f(n) = O(g(n))$,
+    если $\exists C > 0$, $n_{0}$: $\forall n > n_{0}$ $|f(n)| \leq C \cdot |g(n)|$.
+\end{definition}
+
+\begin{definition}
+    $f(n) = o(g(n))$,
+    если $\forall C > 0$  $\exists n_{0}:$ $\forall n > n_{0}$ $|f(n)| < C \cdot |g(n)|$.
+\end{definition}
+
+
+\begin{exercise}
+    Известно, что $f(n), g(n) > 0$, используя определение,
+    докажите следующее свойство $\max(f(n), g(n)) = \Theta(f(n) + g(n))$.
+\end{exercise}
+% \begin{solution}
+% \end{solution}
+
+
+\begin{exercise}
+    Покажите, что $\ln n! = \Theta(n \ln n)$.
+\end{exercise}
+\begin{remark}
+    Если упражнение длительное время вам не сдается, то подумайте, знаете ли вы какие-либо
+    асимптотические приближения для n!, если нет, то прочитайте про них.
+\end{remark}
+% \begin{solution}
+% \end{solution}
+
+\begin{exercise}
+    Пусть $f(n) = [\ln n]!$. Существует ли полином $p(n)$, что $f(n) = O(p(n))$?
+\end{exercise}
+% % \begin{solution}
+% % \end{solution}
+
+\begin{exercise}
+    Верно ли для всех произвольных $f(n), g(n) > 0$, что, если $f(n) = o(g(n))$,
+    то и $\ln(f(n)) = o(\ln(g(n)))$.
+\end{exercise}
+% \begin{solution}
+% \end{solution}
+
+\begin{exercise}
+    Докажите, что $(\ln n)^k = O(n^{\varepsilon})$, где $\varepsilon > 0$, a $k \in \mathbb{N}^{+}$.
+\end{exercise}
+% \begin{solution}
+% \end{solution}
+
+
+\end{document}
