@@ -1,0 +1,80 @@
+\documentclass[10pt, oneside]{article}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{amssymb,amsthm,amsmath}
+
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+\parindent=1.25cm
+
+% ExCounter:
+\newcounter{ExCounter}
+\setcounter{ExCounter}{1}
+
+% DefCounter:
+\newcounter{DefCounter}
+\setcounter{DefCounter}{1}
+
+
+\newenvironment{exercise}
+    {\textbf{Упражнение \arabic{ExCounter}.}}
+    {\par\stepcounter{ExCounter}}
+
+\newenvironment{solution}
+    {\textit{Решение.}}
+    {\par}
+
+\newenvironment{remark}
+    {\textit{Замечение.}}
+    {\par}
+
+
+\title{Тест}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}
+    Дан массив чисел размера $n$. Предложите алгоритм, определяющий есть ли в этом массиве два числа,
+    в сумме дающие 100, со сложностью $n \log n$.
+\end{exercise}
+\begin{solution}
+    Отсортируем исходный массив. Затем поставим указатель на первый и последний элементы.
+    Если сумма двух текущих элементов больше 100, то будем двигать правый указатель,
+    если меньше, то двигать левый указатель, иначе мы нашли искомую пару.
+    Алгоритм продолжает работу, пока указатели не встретятся.
+\end{solution}
+
+\begin{exercise}
+    Студент реализовал рекурсивный алгоритм, который в в лексикографическом порядке выводит на экран
+    все строки длиной $n$ состоящие из $0$ и $1$. При этом максимальная глубина рекурсии равна
+    $\Theta(n)$. Объясните, почему студенту не стоит об этом беспокоиться.
+\end{exercise}
+\begin{solution}
+    Размер вывода равен $N = n \cdot 2^n$, а значит  глубина рекусии  равна $log N$.
+    Это значит, что для $n$, которое подразумевает разумное время исполнения алгоритма,
+    стек не переполнится.
+\end{solution}
+
+\begin{exercise}
+    Верно ли, что  $f(n+1) = O(f(n))$. Ответ обоснуйте.
+\end{exercise}
+\begin{solution}
+    Для этой задачи существует очевидный контрпример, который не будет расскрыт,
+    так как такая же задача попала вам в домашнее задание.
+\end{solution}
+
+\begin{exercise}
+    Докажите, что $2^n = O(n!)$.
+\end{exercise}
+\begin{solution}
+    Для решения можно применить очень грубую оценку $n! > 2^n$.
+\end{solution}
+
+\end{document}
