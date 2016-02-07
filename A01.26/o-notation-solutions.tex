@@ -1,0 +1,143 @@
+\documentclass[10pt, oneside, notitlepage]{article}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{amssymb,amsthm,amsmath}
+
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+\parindent=1.25cm
+
+% ExCounter:
+\newcounter{ExCounter}
+\setcounter{ExCounter}{1}
+
+% DefCounter:
+\newcounter{DefCounter}
+\setcounter{DefCounter}{1}
+
+
+\newenvironment{definition}
+    {\textbf{Определение \arabic{DefCounter}.}}
+    {\par\stepcounter{DefCounter}}
+
+\newenvironment{exercise}
+    {\textbf{Упражнение \arabic{ExCounter}.}}
+    {\par\stepcounter{ExCounter}}
+
+\newenvironment{solution}
+    {\textit{Решение.}}
+    {\par}
+
+\newenvironment{remark}
+    {\textit{Замечение.}}
+    {\par}
+
+
+\title{Упражнения}
+
+\begin{document}
+
+\begin{exercise}
+    Известно, что $f(n), g(n) > 0$, используя определение,
+    докажите следующее свойство $\max(f(n), g(n)) = \Theta(f(n) + g(n))$.
+\end{exercise}
+\begin{solution}
+    Разобьем доказательство на две части.
+    \begin{enumerate}
+        \item Заметим, что $\max(f(n), g(n))$ можно оценить сферху, как $f(n) + g(n)$,
+            т.к. $f(n), g(n) > 0$, следовательно $\max(f(n), g(n)) = O(f(n) + g(n))$.
+        \item В свою очередь $f(n) + g(n)$ можно оценить сферху, как $2 \cdot \max(f(n), g(n))$,
+            т.к. $f(n), g(n) > 0$, следовательно $f(n) + g(n) = O(f(n) + g(n))$.
+    \end{enumerate}
+    Из этого по определению вытекает то, что и нужно доказать.
+\end{solution}
+
+
+\begin{exercise}
+    Покажите, что $\ln n! = \Theta(n \ln n)$.
+\end{exercise}
+\begin{solution}
+    Наиболее популярный вид записи формулы Стирлинга выглядит следующим образом
+    \begin{align*}
+        \ln(n!) = n \ln n - n + O(\ln n),
+    \end{align*}
+    из чего вытекает уже нужная оценка $\ln n! = \Theta(n \ln n)$.
+    Упражнение расчитано на то, чтобы вы покапались в теории и узнали про этот факт,
+    если вам еще не прочитали его в курсе математического анализа.
+\end{solution}
+
+\begin{exercise}
+    Пусть $f(n) = [\ln n]!$. Существует ли полином $p(n)$, что $f(n) = O(p(n))$?
+\end{exercise}
+\begin{solution}
+    Исходя из формулы стирлинга справедлива следующая оценка $n! > \Big(\frac{n}{e}\Big)^{n}$.
+    В свою очередь $[\ln n] > \ln \frac{n}{e}$. Тогда
+    \begin{align*}
+        [\ln n]! > \Big(\frac{\ln\frac{n}{e}}{e}\Big)^{\ln\frac{n}{e}}.
+    \end{align*}
+    Рассмотрим следующий предел
+    \begin{align*}
+        \lim_{n \to \infty} \frac{
+            \frac{n}{e} \cdot n^k
+        } {
+            \Big(\ln\frac{n}{e}\Big)^{\ln\frac{n}{e}}
+        } =
+        \lim_{n \to \infty} e^{p} \text{, где }
+        p = (k + 1) \cdot n - 1 - \ln\big(\ln(\frac{n}{e})\big)(\ln n - 1)
+    \end{align*}
+    Заметим, что
+    \begin{align*}
+        p > (k + 1) \cdot \ln n - 1 - \ln\big(\ln(\frac{n}{e})\big)(\ln n - \frac{1}{k+1}) = \\
+        (k + 1)\big(\ln n - \frac{1}{k + 1}\big)\Big(1 - \ln\big(\ln(\frac{n}{e})\big)\Big).
+    \end{align*}
+    Очевидно, что $p \to - \infty$ при $n \to \infty$. А значит такого многочлена не существует,
+    так как предел стремится к $0$ при любом $k$.
+
+
+
+\end{solution}
+
+\begin{exercise}
+    Верно ли для всех произвольных $f(n), g(n) > 0$, что, если $f(n) = O(g(n))$,
+    то и $\ln(f(n)) = O(\ln(g(n)))$.
+\end{exercise}
+\begin{solution}
+    Утверждение неверно, очевидно, что ${e^{-n^2}} = O(e^{-n})$,
+    однако, $n^2 \neq O(n)$.
+\end{solution}
+
+\begin{exercise}
+    Докажите, что $(\ln n)^k = O(n^{\varepsilon})$, где $\varepsilon > 0$, a $k \in \mathbb{N}^{+}$.
+\end{exercise}
+\begin{solution}
+    Рассмотрим следующий предел $\lim_{n \to \infty} \frac{(\ln n)^k}{n^{\varepsilon}}$.
+    Для его вычисление воспользуемя правилом Лопиталя. Применим его один раз
+    \begin{align*}
+        \lim_{n \to \infty} \frac{
+            (\ln n)^k
+        }{
+            n^{\varepsilon}
+        } =
+        \lim_{n \to \infty} \frac{
+            \frac{1}{n} (\ln n)^{k - 1}
+        }{
+            n^{\varepsilon - 1}
+        } =  \lim_{n \to \infty} \frac{
+            (\ln n)^{k - 1}
+        }{
+            n^{\varepsilon}
+        }.
+    \end{align*}
+    Мы уменьшили степень лограрифма, но при это знаменатель не изменился.
+    Таки оразом, применив правило $k$ раз, получим следующий предел
+    $\lim_{n \to \infty} \frac{1}{n^{\varepsilon}}$.
+    А из этого уже следует необходимый нам факт.
+\end{solution}
+
+\end{document}
