@@ -1,0 +1,73 @@
+\documentclass[10pt, oneside, notitlepage]{article}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{amssymb,amsthm,amsmath}
+
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+\parindent=1.25cm
+
+% ExCounter:
+\newcounter{ExCounter}
+\setcounter{ExCounter}{1}
+
+% DefCounter:
+\newcounter{DefCounter}
+\setcounter{DefCounter}{1}
+
+
+\newenvironment{definition}
+    {\textbf{Определение \arabic{DefCounter}.}}
+    {\par\stepcounter{DefCounter}}
+
+\newenvironment{exercise}
+    {\textbf{Упражнение \arabic{ExCounter}.}}
+    {\par\stepcounter{ExCounter}}
+
+\newenvironment{solution}
+    {\textit{Решение. }}
+    {\par}
+
+\newenvironment{remark}
+    {\textit{Замечение.}}
+    {\par}
+
+
+\title{Упражнение}
+\author{simagin.mail@yandex.ru}
+\date{A03.24}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{std::vector}
+    Контейнер std::vector<T> по сути является динамическим массивом объектов,
+    который имеет дополнительные возможности,
+    вроде автоматического изменения размера при вставке или удалении элементов.
+    Обычно вектор представляет собой некоторый пул памяти и указатель на его начало,
+    а также размер пула (capacity) и текущи размер (size).
+
+    Есть две специальные ситуации:
+    \begin{enumerate}
+        \item Если в какой-то момент пул памяти полностью заполняется,
+        то вектор выделяет новый пул, который в два раза больше предыдущего.
+        Копирует туда все текущие элементы, а старый пул высвобождает.
+        \item Если в какой-то момент количество элементов в векторе достигает одной четверти от рамера пула,
+        то вектор создает новый пул, который в два раза меньше, чем текущий.
+        Также копирут все элементы туда, а старый освобождает.
+    \end{enumerate}
+
+    Пусть изначальный размер пула 1, а в векторе нет элементов.
+    Докажите, что $n$ операций добавления элемента в конец либо удаление элемента из конца массива,
+    сделанных в произвольном порядке, имеют амортизационную стоимость $O(n)$.
+
+\end{document}
+
